@@ -1,0 +1,12 @@
+build/
+*.o
+moc_*
+
+build/
+*.o
+moc_*
+ui_*.h
+build/
+*.o
+moc_*
+ui_*.h

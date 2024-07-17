@@ -1,12 +1,20 @@
-QT += core gui widgets
-
-TARGET = SCSIGui
 TEMPLATE = app
+CONFIG += c++11
+QT += widgets
 
-SOURCES += main.cpp \
-           mainwindow.cpp
+SOURCES += src/main.cpp \
+           src/mainwindow.cpp
 
-HEADERS += mainwindow.h
+HEADERS += include/mainwindow.h
 
-FORMS += mainwindow.ui
+FORMS += ui/mainwindow.ui
+
+# Add build directory for generated files
+OBJECTS_DIR = build
+MOC_DIR = build
+RCC_DIR = build
+UI_DIR = build
+
+# Include directory for headers
+INCLUDEPATH += include
 

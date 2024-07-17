@@ -23,7 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::scanDevices()
 {
-    executeCommand("sudo sg_scan -i");
+    executeCommand("sudo lsscsi -g");
 }
 
 void MainWindow::openDevice()
@@ -68,10 +68,13 @@ void MainWindow::closeDevice()
     ui->messageLabel->setText("Device closed: " + device);
 }
 
+
 QString MainWindow::executeCommandSync(const QString &command)
 {
     QProcess process;
-    process.start(command);
+    QStringList arguments = QProcess::splitCommand(command);
+    QString program = arguments.takeFirst();  // Extract the program (first element) from arguments
+    process.start(program, arguments);
     process.waitForFinished();
     QString output(process.readAllStandardOutput());
     QString error(process.readAllStandardError());
@@ -80,6 +83,7 @@ QString MainWindow::executeCommandSync(const QString &command)
     }
     return output;
 }
+
 
 void MainWindow::executeCommand(const QString &command)
 {
